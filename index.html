@@ -1,61 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Battletoads - Kubo Touch</title>
+    <title>Sonic 3 Complete - Kubo Touch</title>
+
     <style>
-        *, *::before, *::after { box-sizing: border-box; }
-        body, html { 
-            margin: 0; 
-            padding: 0; 
-            width: 100%; 
-            min-height: 100%; 
-            background-color: #121212; 
-            color: #fff; 
-            font-family: Arial, sans-serif; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            overflow-x: hidden; 
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
-        
-        header { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            text-align: center; 
-            padding: 15px; 
-            background: #1e1e1e; 
-            z-index: 5; 
-        }
-        
-        .badge { 
-            background: #333333; 
-            color: #fff; 
-            padding: 4px 12px; 
-            border-radius: 20px; 
-            font-weight: bold; 
-            font-size: 14px; 
-            border: 1px solid #555; 
-        }
-        
-        #game-card { 
+
+        body, html {
+            margin: 0;
+            padding: 0;
             width: 100%;
-            max-width: 440px; 
-            margin: 80px 20px 20px 20px; 
-            background: #1e1e1e; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7); 
+            min-height: 100%;
+            background-color: #121212;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            background: #1e1e1e;
+            z-index: 5;
+        }
+
+        .badge {
+            background: #333333;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #555;
+        }
+
+        #game-card {
+            width: 100%;
+            max-width: 440px;
+            margin: 80px 20px 20px 20px;
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
             perspective: 1000px;
         }
-        
+
+        /* Cartucho 3D */
         .cartridge-wrapper {
             width: 100%;
-            padding: 25px 10px 15px 10px;
+            padding: 25px 10px 18px 10px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -64,170 +69,279 @@
             cursor: pointer;
         }
 
-        .snes-cart-body {
-            width: 380px;
-            height: 220px;
+        /* Corpo do cartucho NES */
+        .nes-cart-body {
+            width: 248px;
+            height: 282px;
             position: relative;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            transform: translateZ(20px);
-            filter: drop-shadow(0 15px 22px rgba(0,0,0,0.7));
-        }
-
-        .cart-wing {
-            width: 58px;
-            height: 204px;
-            background: linear-gradient(180deg, #9f9fa9 0%, #8e8e98 100%);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 22px 0 34px 0;
-            box-shadow: inset 0 2px 3px rgba(255,255,255,0.4), inset 0 -4px 6px rgba(0,0,0,0.3);
-        }
-
-        .cart-wing.left {
-            border-radius: 4px 0 0 4px;
-            border-right: 1px solid #6b6b74;
-        }
-
-        .cart-wing.right {
-            border-radius: 0 4px 4px 0;
-            border-left: 1px solid #6b6b74;
-        }
-
-        .wing-groove {
-            width: 100%;
-            height: 4px;
-            background: #61616a;
-            border-bottom: 1px solid #b8b8c2;
-        }
-
-        .cart-screw {
-            position: absolute;
-            bottom: 8px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #666 25%, #1a1a1a 85%);
-            box-shadow: inset 0 1px 2px #000, 0 1px 1px rgba(255,255,255,0.45);
-        }
-        .cart-wing.left .cart-screw { left: 26px; }
-        .cart-wing.right .cart-screw { right: 26px; }
-
-        .cart-center-block {
-            width: 264px;
-            height: 220px;
-            background: linear-gradient(180deg, #acacb6 0%, #9696a0 100%);
-            border-radius: 6px 6px 2px 2px;
-            box-shadow: 
-                -4px 0 7px rgba(0,0,0,0.28),
-                4px 0 7px rgba(0,0,0,0.28),
-                inset 0 2px 4px rgba(255,255,255,0.6),
-                inset 0 -3px 6px rgba(0,0,0,0.35);
+            background: linear-gradient(180deg, #c6c9ce 0%, #aeb3ba 50%, #959ba3 100%);
+            border-radius: 6px 6px 4px 4px;
+            border: 1px solid #d7dade;
+            box-shadow:
+                inset 0 2px 3px rgba(255,255,255,0.55),
+                inset 0 -4px 7px rgba(0,0,0,0.35),
+                inset 3px 0 4px rgba(255,255,255,0.28),
+                inset -3px 0 4px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 0 12px;
-            z-index: 2;
+            padding: 12px 14px 10px 14px;
+            transform: translateZ(20px);
+            filter: drop-shadow(0 15px 22px rgba(0,0,0,0.75));
         }
 
-        .cart-label-box {
+        /* Ranhuras horizontais superiores características do NES */
+        .nes-top-ridges {
             width: 100%;
-            height: 112px;
-            background-color: #0b0b0b;
-            background-image: url('Battletoads+(USA)-image.jpg');
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 0 0 12px 12px;
-            border: 2px solid #141414;
-            border-top: none;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.55);
-            position: relative;
-            overflow: hidden;
+            height: 30px;
+            background: repeating-linear-gradient(
+                180deg,
+                #8f959d 0px,
+                #8f959d 3px,
+                #cfd2d7 3px,
+                #cfd2d7 6px
+            );
+            border-radius: 4px;
+            border: 1px solid #7d838b;
+            box-shadow: inset 0 2px 3px rgba(0,0,0,0.25);
         }
 
-        .cart-label-box::after {
+        /* Faixa com marca estilo NES */
+        .nes-header-strip {
+            width: 100%;
+            margin-top: 8px;
+            padding: 4px 8px;
+            background: #2b2e33;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+        }
+
+        .nes-brand-text {
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #e5e7eb;
+            text-transform: uppercase;
+        }
+
+        .nes-system-tag {
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            color: #f87171;
+            text-transform: uppercase;
+        }
+
+        /* Rebaixo da etiqueta */
+        .nes-label-recess {
+            width: 100%;
+            height: 176px;
+            margin-top: 8px;
+            padding: 3px;
+            background: #878d95;
+            border-radius: 4px;
+            box-shadow:
+                inset 0 2px 4px rgba(0,0,0,0.45),
+                0 1px 1px rgba(255,255,255,0.45);
+            display: flex;
+        }
+
+        .nes-label-sticker {
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            background: #181a1f;
+            border: 1px solid #3f434a;
+        }
+
+        /* Capa centralizada */
+        .nes-sticker-art {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: #181a1f;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nes-sticker-art img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: center;
+            transform: none;
+            image-rendering: auto;
+            filter: contrast(1.04) saturate(1.06);
+            backface-visibility: hidden;
+            display: block;
+        }
+
+        /* Reflexo na etiqueta */
+        .nes-label-sticker::after {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 60%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+            top: 0;
+            left: -120%;
+            width: 65%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.25),
+                transparent
+            );
             transform: skewX(-25deg);
             transition: left 0.6s ease;
-        }
-        .snes-cart-body:hover .cart-label-box::after {
-            left: 150%;
+            z-index: 3;
+            pointer-events: none;
         }
 
-        .cart-lock-slot {
-            width: 236px;
-            height: 18px;
-            margin-top: 28px;
-            background: linear-gradient(180deg, #65656e 0%, #83838c 100%);
-            border-radius: 9px;
-            box-shadow: inset 0 3px 5px rgba(0,0,0,0.55), 0 1px 1px rgba(255,255,255,0.45);
+        .nes-cart-body:hover .nes-label-sticker::after {
+            left: 160%;
+        }
+
+        /* Base inferior do cartucho NES */
+        .nes-bottom-grip {
+            width: 100%;
+            height: 12px;
+            margin-top: 8px;
+            border-top: 2px solid #7d838b;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: space-between;
+            padding: 0 6px;
         }
 
-        .cart-lock-inner {
-            width: 78px;
-            height: 11px;
-            background: #777780;
+        .nes-grip-notch {
+            width: 22px;
+            height: 4px;
+            background: #7b8189;
             border-radius: 2px;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.45);
         }
 
-        .content { padding: 20px; }
-        h1 { margin: 0 0 10px 0; font-size: 24px; color: #e5e5e5; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .meta-info { display: flex; gap: 10px; margin-bottom: 15px; font-size: 13px; color: #aaa; }
-        .description { font-size: 14px; line-height: 1.5; color: #ddd; margin-bottom: 15px; }
-        .details { font-size: 13px; color: #bbb; margin-bottom: 20px; }
-        .details ul { padding-left: 20px; margin: 0; }
-        
-        .btn-play { 
-            display: block; 
-            width: 100%; 
-            padding: 16px; 
-            background: #2b2b2b; 
-            color: #fff; 
-            border: 1px solid #555; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            font-size: 18px; 
-            cursor: pointer; 
-            text-align: center; 
+        /* Informações */
+        .content {
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            color: #e5e5e5;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        .details {
+            font-size: 13px;
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .details ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        /* Botão jogar */
+        .btn-play {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #2b2b2b;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
             outline: none;
             position: relative;
             z-index: 10;
             transition: background 0.2s, transform 0.1s;
         }
-        .btn-play:hover { background: #3b3b3b; transform: translateY(-2px); }
-        .btn-play:active { background: #1f1f1f; transform: translateY(0); }
 
-        #game-container { 
-            display: none; 
+        .btn-play:hover {
+            background: #3b3b3b;
+            transform: translateY(-2px);
+        }
+
+        .btn-play:active {
+            background: #1f1f1f;
+            transform: translateY(0);
+        }
+
+        /* Emulador */
+        #game-container {
+            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%; 
-            height: 100%; 
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
             z-index: 99999;
             background: #000;
+            overflow: hidden;
         }
-        #game { width: 100%; height: 100%; }
 
+        #game {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            overflow: hidden;
+        }
+
+        /* Oculta botão "Sair" / exit sobreposto no emulador */
+        .ejs_exit_btn,
+        .ejs_exit_button,
+        [class*="exit"] {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* Telas menores */
         @media (max-width: 400px) {
-            .snes-cart-body {
-                transform: scale(0.85) translateZ(20px);
+            .nes-cart-body {
+                transform: scale(0.9) translateZ(20px);
+            }
+
+            #game-card {
+                margin-left: 10px;
+                margin-right: 10px;
             }
         }
     </style>
 </head>
+
 <body>
 
     <header id="header-bar">
@@ -235,79 +349,101 @@
     </header>
 
     <div id="game-card">
+
+        <!-- Cartucho NES -->
         <div class="cartridge-wrapper" id="cartridge3d">
-            <div class="snes-cart-body">
-                <div class="cart-wing left">
-                    <div class="wing-groove"></div>
-                    <div class="wing-groove"></div>
-                    <div class="wing-groove"></div>
-                    <div class="wing-groove"></div>
-                    <div class="wing-groove"></div>
-                    <div class="cart-screw"></div>
+
+            <div class="nes-cart-body">
+
+                <!-- Ranhuras superiores -->
+                <div class="nes-top-ridges"></div>
+
+                <!-- Faixa superior -->
+                <div class="nes-header-strip">
+                    <span class="nes-brand-text">ENTERTAINMENT SYSTEM</span>
+                    <span class="nes-system-tag">NES EDITION</span>
                 </div>
 
-                <div class="cart-center-block">
-                    <div class="cart-label-box"></div>
-                    <div class="cart-lock-slot">
-                        <div class="cart-lock-inner"></div>
+                <!-- Etiqueta do cartucho -->
+                <div class="nes-label-recess">
+                    <div class="nes-label-sticker">
+                        <div class="nes-sticker-art">
+                            <img
+                                id="cover-img"
+                                alt="Capa Sonic 3 Complete"
+                            >
+                        </div>
                     </div>
                 </div>
 
-                <div class="cart-wing right">
-                    <div class="wing-groove"></div>
-                    <div class="wing-groove"></div>
-                    <div class="wing-groove"></div>
-                    <div class="wing-groove"></div>
-                    <div class="wing-groove"></div>
-                    <div class="cart-screw"></div>
+                <!-- Detalhe inferior -->
+                <div class="nes-bottom-grip">
+                    <span class="nes-grip-notch"></span>
+                    <span class="nes-grip-notch"></span>
                 </div>
+
             </div>
         </div>
-        
+
+        <!-- Informações do jogo -->
         <div class="content">
-            <h1>Battletoads</h1>
-            
+
+            <h1>Sonic 3 Complete</h1>
+
             <div class="meta-info">
                 <span>🎮 1-2 Jogadores</span>
-                <span>📅 1991</span>
-                <span>🕹️ Nintendo</span>
+                <span>📅 1994</span>
+                <span>🕹️ Kubo Touch</span>
             </div>
 
             <p class="description">
-                Encare fases intensas de pancadaria, velocidade e obstáculos com os Battletoads Rash, Zitz e Pimple na missão para resgatar a Princesa Angelica e o Professor T. Bird da Rainha Negra.
+                Salta, corre e explora fases clássicas cheias de velocidade, zonas secretas e desafios retro com controlos táteis prontos a jogar.
             </p>
 
             <div class="details">
                 <ul>
-                    <li><strong>🕹️ Gênero:</strong> Beat 'em up / Platformer</li>
+                    <li><strong>🕹️ Género:</strong> Plataformas / Ação</li>
                 </ul>
             </div>
 
-            <button id="play-btn" class="btn-play">JOGAR AGORA</button>
+            <button id="play-btn" class="btn-play">
+                JOGAR AGORA
+            </button>
+
         </div>
     </div>
 
+    <!-- Tela do jogo -->
     <div id="game-container">
         <div id="game"></div>
     </div>
 
-    <script type="text/javascript">
+    <script>
+        /* Capa do jogo */
+        const COVER_FILE = 'Sonic-the-Hedgehog-3.jpg';
+        document.getElementById('cover-img').src = './' + encodeURI(COVER_FILE);
+
+        /* Efeito 3D do cartucho */
         const card = document.getElementById('game-card');
         const cartridge = document.getElementById('cartridge3d');
 
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
+
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-            
+
             const rotateX = (-y / 14).toFixed(2);
             const rotateY = (x / 14).toFixed(2);
-            
-            cartridge.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+
+            cartridge.style.transform =
+                `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
         });
 
         card.addEventListener('mouseleave', () => {
-            cartridge.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+            cartridge.style.transform =
+                `rotateX(0deg) rotateY(0deg) scale(1)`;
+
             cartridge.style.transition = 'transform 0.5s ease';
         });
 
@@ -315,27 +451,104 @@
             cartridge.style.transition = 'none';
         });
 
-        document.getElementById('play-btn').addEventListener('click', function() {
+        /* Configuração dos ficheiros do repositório */
+        const ROM_FILE = 'Sonic3C.gen';
+        const DEFAULT_CORE = 'genesis_plus_gx';
+
+        const CDN_BASES = [
+            'https://cdn.emulatorjs.org/stable/data/',
+            'https://cdn.emulatorjs.org/latest/data/'
+        ];
+
+        function hideExitButtons() {
+            const candidates = document.querySelectorAll("#game-container button, #game-container div, #game-container span, #game-container a");
+            candidates.forEach((el) => {
+                const text = (el.textContent || "").trim().toLowerCase();
+                if (text === "× sair" || text === "sair" || text === "x sair") {
+                    if (el.children.length === 0) {
+                        el.style.setProperty("display", "none", "important");
+                        el.style.setProperty("visibility", "hidden", "important");
+                    }
+                }
+            });
+        }
+
+        const observer = new MutationObserver(() => {
+            hideExitButtons();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        function focusGameCanvas() {
+            const gameEl = document.getElementById("game");
+            if (!gameEl) return;
+            gameEl.setAttribute("tabindex", "0");
+            gameEl.focus({ preventScroll: true });
+
+            const canvas = gameEl.querySelector("canvas");
+            if (canvas) {
+                canvas.setAttribute("tabindex", "0");
+                canvas.focus({ preventScroll: true });
+            }
+        }
+
+        window.addEventListener("keydown", (e) => {
+            if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", " "].includes(e.key)) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        function launchEmulator(coreName = DEFAULT_CORE, cdnIndex = 0) {
             document.getElementById('header-bar').style.display = 'none';
             document.getElementById('game-card').style.display = 'none';
-            
-            var container = document.getElementById('game-container');
+
+            const container = document.getElementById('game-container');
+            const gameDiv = document.getElementById('game');
             container.style.display = 'block';
+            gameDiv.innerHTML = '';
+
+            const oldLoader = document.getElementById('ejs-loader-script');
+            if (oldLoader) oldLoader.remove();
+
+            Object.keys(window).forEach((key) => {
+                if (key.startsWith('EJS_')) {
+                    delete window[key];
+                }
+            });
 
             window.EJS_player = '#game';
-            window.EJS_core = 'fceumm';
-            window.EJS_gameName = 'Battletoads';
-            window.EJS_color = '#4b4b56';
+            window.EJS_core = coreName;
+            window.EJS_gameName = 'Sonic 3 Complete';
+            window.EJS_color = '#e62e25';
             window.EJS_startOnLoaded = true;
-            window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
-            
-            window.EJS_gameUrl = './battletoads.nes';
+            window.EJS_pathtodata = CDN_BASES[cdnIndex] || CDN_BASES[0];
+            window.EJS_gameUrl = './' + encodeURI(ROM_FILE);
 
-            var script = document.createElement('script');
-            script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
+            const script = document.createElement('script');
+            script.id = 'ejs-loader-script';
+            script.src = window.EJS_pathtodata + 'loader.js';
             script.async = true;
+
+            script.onload = () => {
+                hideExitButtons();
+                setTimeout(() => {
+                    focusGameCanvas();
+                    hideExitButtons();
+                }, 600);
+            };
+
+            script.onerror = () => {
+                if (cdnIndex + 1 < CDN_BASES.length) {
+                    launchEmulator(coreName, cdnIndex + 1);
+                }
+            };
+
             document.body.appendChild(script);
+        }
+
+        document.getElementById('play-btn').addEventListener('click', function() {
+            launchEmulator(DEFAULT_CORE, 0);
         });
     </script>
+
 </body>
 </html>
